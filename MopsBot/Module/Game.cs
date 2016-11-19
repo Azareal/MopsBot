@@ -287,7 +287,7 @@ namespace MopsBot.Module
                 .Parameter("(true) to get global ranking", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    List<Data.User.User> tempSort = userScores.users.OrderByDescending(u => u.Score).ToList();
+                    List<Data.Individual.User> tempSort = userScores.users.OrderByDescending(u => u.Score).ToList();
 
                     string output = "";
 
@@ -295,7 +295,7 @@ namespace MopsBot.Module
                     {
                         int count = 0;
 
-                        foreach (Data.User.User curUser in tempSort)
+                        foreach (Data.Individual.User curUser in tempSort)
                         {
                             if (count >= 10) break;
                             count++;
@@ -332,7 +332,7 @@ namespace MopsBot.Module
                 .Parameter("(true) to get global ranking", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    List<Data.User.User> tempSort = userScores.users.OrderByDescending(u => u.Experience).ToList();
+                    List<Data.Individual.User> tempSort = userScores.users.OrderByDescending(u => u.Experience).ToList();
 
                     string output = "";
 
@@ -340,7 +340,7 @@ namespace MopsBot.Module
                     {
                         int count = 0;
 
-                        foreach (Data.User.User curUser in tempSort)
+                        foreach (Data.Individual.User curUser in tempSort)
                         {
                             if (count >= 10) break;
                             count++;
@@ -377,7 +377,7 @@ namespace MopsBot.Module
                 .Parameter("(true) to get global ranking", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    List<Data.User.User> tempSort = userScores.users.OrderByDescending(u => u.Level).ToList();
+                    List<Data.Individual.User> tempSort = userScores.users.OrderByDescending(u => u.Level).ToList();
 
                     string output = "";
 
@@ -385,7 +385,7 @@ namespace MopsBot.Module
                     {
                         int count = 0;
 
-                        foreach (Data.User.User curUser in tempSort)
+                        foreach (Data.Individual.User curUser in tempSort)
                         {
                             if (count >= 10) break;
                             count++;
@@ -455,12 +455,12 @@ namespace MopsBot.Module
                     int exp = userScores.users[i].Experience;
                     int mip = userScores.users[i].monster;
                     userScores.users.RemoveAt(i);
-                    userScores.users.Add(new Data.User.User(user.Id, score, exp));
+                    userScores.users.Add(new Data.Individual.User(user.Id, score, exp));
                     userScores.writeScore();
                     return;
                 }
             }
-            userScores.users.Add(new Data.User.User(user.Id, score, 0));
+            userScores.users.Add(new Data.Individual.User(user.Id, score, 0));
             userScores.writeScore();
         }
 
@@ -474,16 +474,16 @@ namespace MopsBot.Module
                     score += userScores.users[i].Score;
                     exp += userScores.users[i].Experience;
                     userScores.users.RemoveAt(i);
-                    userScores.users.Add(new Data.User.User(user.Id, score, exp));
+                    userScores.users.Add(new Data.Individual.User(user.Id, score, exp));
                     userScores.writeScore();
                     return;
                 }
             }
-            userScores.users.Add(new Data.User.User(user.Id, score, exp));
+            userScores.users.Add(new Data.Individual.User(user.Id, score, exp));
             userScores.writeScore();
         }
 
-        public static Data.User.User findDataUser(User user)
+        public static Data.Individual.User findDataUser(User user)
         {
             userScores = new Data.UserScore();
             for (int i = 0; i < userScores.users.Count; i++)
